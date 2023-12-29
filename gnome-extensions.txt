@@ -1,0 +1,4 @@
+just-perfection-desktop@just-perfection
+blur-my-shell@aunetx
+pop-shell@system76.com
+user-theme@gnome-shell-extensions.gcampax.github.coma

@@ -1,0 +1,184 @@
+{
+	"name": "nerdtree",
+	"displayName": "NERDTree",
+	"description": "⌨️ NERDTree for Visual Studio Code",
+	"icon": "docs/icon.png",
+	"version": "1.2.1",
+	"publisher": "Llam4u",
+	"keywords": [
+		"NERDTree",
+		"vim",
+		"vi",
+		"vscodevim"
+	],
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/61130061/NERDTree.git"
+	},
+	"homepage": "https://github.com/61130061/NERDTree",
+	"bugs": {
+		"url": "https://github.com/61130061/NERDTree/issues"
+	},
+	"engines": {
+		"vscode": "^1.71.0"
+	},
+	"categories": [
+		"Other",
+		"Keymaps"
+	],
+	"activationEvents": [
+		"onCommand:nerdtree.unfocusSidebarOrClose",
+		"onCommand:nerdtree.openFile",
+		"onCommand:nerdtree.openFileNewWindow"
+	],
+	"main": "./dist/extension.js",
+	"contributes": {
+		"configuration": {
+			"title": "NERDTree",
+			"properties": {
+				"nerdtree.hideSidebarWhenOpenFile": {
+					"type": "boolean",
+					"default": true,
+					"description": "If this option is checked ✅, the sidebar will be hidden, after you open a file from the Explorer view with NERDTree key ⌨️ (t) or (Enter). Otherwise ❌, nothing will happend."
+				},
+				"nerdtree.alwaysShowSidebar": {
+					"type": "boolean",
+					"default": false,
+					"description": "If this option is checked ✅, the sidebar will be shown everytime you switch between editor and file explorer with NERDTree shortcut ⌨️ (ctrl + n). Otherwise ❌, sidebar will be toggled instead"
+				}
+			}
+		},
+		"keybindings": [
+			{
+				"key": "ctrl+n",
+				"command": "nerdtree.unfocusSidebarOrClose",
+				"when": "sideBarVisible && filesExplorerFocus"
+			},
+			{
+				"key": "ctrl+n",
+				"command": "workbench.files.action.focusFilesExplorer",
+				"when": "sideBarVisible && !filesExplorerFocus && !suggestWidgetVisible && vim.mode != 'Insert'"
+			},
+			{
+				"key": "ctrl+n",
+				"command": "workbench.files.action.focusFilesExplorer",
+				"when": "!sideBarVisible && !suggestWidgetVisible && vim.mode != 'Insert'"
+			},
+			{
+				"key": "ctrl+n",
+				"command": "editor.action.triggerSuggest",
+				"when": "editorHasCompletionItemProvider && textInputFocus && !editorReadonly && !suggestWidgetVisible &&  vim.mode == 'Insert'"
+			},
+			{
+				"key": "ctrl+n",
+				"command": "selectNextSuggestion",
+				"when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus &&  vim.mode == 'Insert'"
+			},
+			{
+				"key": "t",
+				"command": "nerdtree.openFileNewWindow",
+				"when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceIsFolder && !inputFocus"
+			},
+			{
+				"key": "enter",
+				"command": "nerdtree.openFile",
+				"when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceIsFolder && !inputFocus"
+			},
+			{
+				"key": "enter",
+				"command": "list.select",
+				"when": "explorerViewletVisible && filesExplorerFocus && explorerResourceIsFolder && !inputFocus"
+			},
+			{
+				"key": "h",
+				"command": "list.collapse",
+				"when": "listFocus && !inputFocus"
+			},
+			{
+				"key": "j",
+				"command": "list.focusDown",
+				"when": "listFocus && !inputFocus"
+			},
+			{
+				"key": "k",
+				"command": "list.focusUp",
+				"when": "listFocus && !inputFocus"
+			},
+			{
+				"key": "l",
+				"command": "list.select",
+				"when": "listFocus && !inputFocus"
+			},
+			{
+				"key": "m a",
+				"command": "workbench.files.action.createFileFromExplorer",
+				"when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceReadonly && !inputFocus"
+			},
+			{
+				"key": "m d",
+				"command": "moveFileToTrash",
+				"when": "explorerResourceMoveableToTrash && explorerViewletVisible && filesExplorerFocus && !explorerResourceReadonly && !inputFocus"
+			},
+			{
+				"key": "m c",
+				"command": "filesExplorer.copy",
+				"when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceIsRoot && !inputFocus"
+			},
+			{
+				"key": "m v",
+				"command": "filesExplorer.paste",
+				"when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceReadonly && !inputFocus"
+			},
+			{
+				"key": "m f",
+				"command": "workbench.files.action.createFolderFromExplorer",
+				"when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceReadonly && !inputFocus"
+			},
+			{
+				"key": "m r",
+				"command": "renameFile",
+				"when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus"
+			}
+		]
+	},
+	"scripts": {
+		"vscode:prepublish": "yarn run package",
+		"compile": "webpack",
+		"watch": "webpack --watch",
+		"package": "webpack --mode production --devtool hidden-source-map",
+		"vsce": "vsce package",
+		"publish": "vsce publish",
+		"compile-tests": "tsc -p . --outDir out",
+		"watch-tests": "tsc -p . -w --outDir out",
+		"pretest": "yarn run compile-tests && yarn run compile && yarn run lint",
+		"lint": "eslint src --ext ts",
+		"test": "node ./out/test/runTest.js"
+	},
+	"devDependencies": {
+		"@types/glob": "^7.2.0",
+		"@types/mocha": "^9.1.1",
+		"@types/node": "16.x",
+		"@types/vscode": "^1.71.0",
+		"@typescript-eslint/eslint-plugin": "^5.31.0",
+		"@typescript-eslint/parser": "^5.31.0",
+		"@vscode/test-electron": "^2.1.5",
+		"eslint": "^8.20.0",
+		"glob": "^8.0.3",
+		"mocha": "^10.0.0",
+		"ts-loader": "^9.3.1",
+		"typescript": "^4.7.4",
+		"webpack": "^5.74.0",
+		"webpack-cli": "^4.10.0"
+	},
+	"__metadata": {
+		"id": "2a247e46-f01a-468a-84bc-93c6184d2b76",
+		"publisherId": "1189bc25-1b81-476c-9da4-d72a481b6948",
+		"publisherDisplayName": "Llam4u",
+		"targetPlatform": "undefined",
+		"updated": false,
+		"isPreReleaseVersion": false,
+		"installedTimestamp": 1703681407925,
+		"pinned": false,
+		"preRelease": false
+	}
+}
