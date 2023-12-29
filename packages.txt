@@ -1,0 +1,17 @@
+xorg-server
+xorg-xinit
+ttf-hack
+alacritty
+zsh
+sheldon
+pipewire
+pipewire-pulse
+pipewire-alsa
+pipewire-audio
+wireplumber
+telegram-desktop
+neofetch
+chromium
+discord
+gnome-shell-extension-pop-shell-git
+visual-studio-code-bin

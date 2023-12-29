@@ -1,0 +1,47 @@
+window:
+  opacity: 0.8
+font:
+  normal:
+    family: hack
+    style: Regular
+
+  bold:
+    family: hack
+    style: Bold
+
+  italic:
+    family: hack
+    style: Italic
+
+  bold_italic:
+    family: hack
+    style: Bold Italic
+
+  size: 11
+# BEGIN ACE
+colors:
+  primary:
+    background: '#000000'
+    foreground: '#e2e2e2'
+  cursor:
+    text:       '#000000'
+    cursor:     '#e2e2e2'
+  normal:
+    black:      '#000000'
+    red:        '#738DAA'
+    green:      '#559BE9'
+    yellow:     '#51A2FD'
+    blue:       '#909090'
+    magenta:    '#B1B1B1'
+    cyan:       '#A0C1E7'
+    white:      '#e2e2e2'
+  bright:
+    black:      '#9e9e9e'
+    red:        '#738DAA'
+    green:      '#559BE9'
+    yellow:     '#51A2FD'
+    blue:       '#909090'
+    magenta:    '#B1B1B1'
+    cyan:       '#A0C1E7'
+    white:      '#e2e2e2'
+# END ACE
